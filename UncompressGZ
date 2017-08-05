@@ -1,0 +1,17 @@
+import gzip
+
+def uncompressGzFile(filename):
+  if fileName.endswith('.gz'):
+    inFileObj = gzip.open(fileName, 'rb')
+    
+    fileName = fileName[:-3]
+    outFileObj = open(fileName, 'w')
+    
+    for line in inFileObj:
+      outFileObj.write(infileObj.read())
+      
+    inFileObj.close()
+    outFileObj.close()
+
+  return fileName
+      
