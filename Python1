@@ -1,0 +1,39 @@
+How To Install Python 3 and Set Up a Local Programming Environment on Windows 10 
+
+cd ~
+Set-ExecutionPolicy -Scope CurrentUser
+RemoteSigned
+Y
+Get-ExecutionPolicy -List
+
+$script = New-Object Net.WebClient
+$script | Get-Member
+$script.DownloadString("https://chocolatey.org/install.ps1")
+iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+choco upgrade chocolatey
+choco install -y nano
+choco install -y python3
+
+<<<Close the Power Shell window and Open another>>>
+
+cd ~
+python -V
+python -m pip install --upgrade pip
+mkdir Environments
+cd Environments
+python -m venv my_env
+ls my_env
+my_env\Scripts\activate
+
+
+
+
+Creating a Simple Program
+
+Now that we have our virtual environment set up, let’s create a simple “Hello, World!” program. This will make sure that our environment is working and gives us the opportunity to become more familiar with Python if we aren’t already.
+
+To do this, we’ll open up nano and create a new file:
+
+nano hello.py
+print("Hello, World!")
+python hello.py
