@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+@programmer: Margaret Linan
+
+Please use the following code in Python(x,y)
+which when downloaded, installs Python 2.7
+
+Python(x,y) includes Spyder, which is a GUI where you can write code and print out 
+graphs, etc. Python(x,y) carries most of the modules needed by scientists.
+
+The following code reads in a single column of values
+and feeds it to an array. The float(i) can be changed to int(i).
+
+"""
+
+from matplotlib import pyplot
+import matplotlib.pyplot as plt
+
+arr=[]
+filename=('hg19logsamplesize.txt')
+input=open(filename, "rU")
+for line in input.readlines():
+    for i in line.split():
+        arr.append(float(i))
+       
+print arr
+
+pyplot.hist(arr, bins=50,color='g')
+plt.xlabel('Log(Sample Size)')
+plt.ylabel('Frequency')
+plt.title('Histogram of HG19 Sample Size')
