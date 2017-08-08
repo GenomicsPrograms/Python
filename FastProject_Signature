@@ -1,0 +1,77 @@
+############################################################################################################
+#  Author: Margaret Linan 
+#
+#  Date: 8/7/2017
+#  Purpose: To create the columns of the signature file for the FastProject program (*.GMT), you will 
+#           copy the contents of the output files and paste them into an Excel Speadsheet, then highlight and copy
+#           all three columns then paste these into a notepad++ file and name it sig_GSE72056.GMT]
+#  Important: If you need to rerun this script, please delete any output files first.
+#  Input: melan_sample.txt is really GSE72056_melanoma_single_cell_revised_v2.txt
+#  Usage: fastproject melan_sample.txt -s signature_GSE1234.GMT --lean
+############################################################################################################
+from pandas import DataFrame
+import pandas as pd
+import numpy as np
+import os
+
+# Set the working directory
+os.chdir('C:\\Users\\margaret\\Desktop)
+# Read in the data file
+df = DataFrame.from_csv("melan_sample.txt", sep="\t") 
+# Transpose the dataframe and print the first column
+col2rows = df.T
+col2rows.index.name = 'Cell_Samples'
+col2rows.reset_index(inplace=True)
+samples = col2rows.iloc[:,0]
+
+#### You can have labels that are 'plus' or 'minus' OR just 'plus' for both sets or 'minus' for both sets ####
+
+### Up-regulated 
+# List the up-regulated gene sets (example gene set has 10 genes)
+first_set = pd.Series(['Gene1','Gene2', 'Gene3', 'Gene4','Gene5','Gene6','Gene7','Gene8','Gene9','Gene10'])
+# Create the labels for the plus (upregulated) gene set
+label_plus1 = pd.Series(['plus','plus', 'plus', 'plus','plus','plus','plus','plus','plus','plus'])
+
+### Down-regulated
+# List the down-regulated gene sets (example gene set has 12 genes)
+second_set = pd.Series(['Gene1','Gene2', 'Gene3', 'Gene4','Gene5','Gene6','Gene7','Gene8','Gene9','Gene10','Gene11','Gene12'])
+# Create the labels for the minus (down regulated) gene set
+label_plus2 = pd.Series(['minus','minus','minus','minus','minus','minus','minus','minus','minus','minus','minus','minus'])
+
+# Repeat the samples list, 22 times, since there are a total of 22 genes
+cells = pd.concat([samples]*22)
+
+# Convert the cells series into a dataframe
+IDs = cells.to_frame(name=None)
+
+# Save the IDs dataframe to a text file (Make sure that your terminal path, matches the path at the top of this script)
+IDs.to_csv('IDs.txt', header=False, index=False, sep='\t', mode='a')
+
+# Now, we will convert both gene series into dataframes
+first_co_expression_genes = pd.concat([label_plus1, first_set], axis=1)
+
+second_co_expression_genes = pd.concat([label_plus2, second_set], axis=1)
+
+
+# Concatenate the gene set dataframes
+initial_set = first_co_expression_genes.append(second_co_expression_genes, ignore_index=True)
+
+# Replicate the initial set 4,645 times (There are 102,190 rows in the IDs file, and 22 rows in the initial_set, so 102,190/22 = 4,645)
+
+master_set = pd.concat([initial_set]*4645)
+
+# Save the master set to a txt file
+master_set.to_csv('master_set.txt', header=False, index=False, sep='\t', mode='a')
+
+
+# Microsoft Excel Instructions
+# 1. Open the IDs.txt file in Excel 
+# 2. Sort the column of IDs, using A-Z sort 
+# 3. Then paste in the contents of the master_set.txt file in the next two columns of the spreadsheet
+# 4. Highlight all three columns in the spreadsheet, then copy and paste the contents to a notepad++ file
+# 5. Save the file as sig_GSE72056.GMT
+# 6. Make sure this file is saved in the same directory as the input file: melan_sample.txt
+# 7. Run the following command in a terminal (note the path of your terminal, since thats where the output file will show up)
+# 8. fastproject melan_sample.txt -s sig_GSE72056.GMT
+
+ 
