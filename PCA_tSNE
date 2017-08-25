@@ -1,0 +1,45 @@
+from statsmodels.api import datasets
+from sklearn.manifold import TSNE
+from pandas import DataFrame
+import pandas as pd
+from bokeh.plotting import figure, ColumnDataSource, output_notebook, output_file, show, save
+from bokeh.models import HoverTool, WheelZoomTool, PanTool, BoxZoomTool, ResetTool, TapTool, SaveTool
+from bokeh.palettes import brewer
+output_notebook()
+data = pd.read_csv("file.txt", sep="\t")
+data.head(3)
+data_numeric = data.select_dtypes(exclude=['object'])
+perplexity = 15
+learning_rate = 400
+tsne = TSNE(n_components=2, perplexity=perplexity, learning_rate=learning_rate, random_state=700)
+tsne_data = tsne.fit_transform(data_numeric)
+tsne_df = pd.DataFrame(tsne_data, columns=['Component 1', 'Component 2'], index=data.index)
+data_all = pd.concat([data, tsne_df], axis=1)
+category = 'TAG'
+category_items = data_all[category].unique()
+palette = brewer['Set3'][len(category_items) + 1]
+colormap = dict(zip(category_items, palette))
+data_all['color'] = data_all[category].map(colormap)
+data_all.head(3)
+title = "GSE file tSNE"
+source = ColumnDataSource(data_all)
+hover = HoverTool(tooltips=[(column, '@' + column) for column in reversed(data.columns)])
+tools = [hover, WheelZoomTool(), PanTool(), BoxZoomTool(), ResetTool(), TapTool(), SaveTool()]
+p = figure(
+tools=tools,
+title=title,
+plot_width=800,
+plot_height=800,
+toolbar_location='below',
+toolbar_sticky=False, )
+p.circle(
+x='Component 1',
+y='Component 2',
+source=source,
+size=10,
+line_color='#333333',
+line_width=0.5,
+fill_alpha=0.8,
+color='color',
+legend=category)
+show(p)
