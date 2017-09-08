@@ -2,12 +2,12 @@
 #  Author: Margaret Linan 
 #
 #  Date: 8/7/2017
-#  Purpose: To create the columns of the signature file for the FastProject program (*.GMT), you will 
+#  Purpose: To create the columns of the signature file for the FastProject program (*.txt), you will 
 #           copy the contents of the output files and paste them into an Excel Speadsheet, then highlight and copy
-#           all three columns then paste these into a notepad++ file and name it sig_GSE72056.GMT]
+#           all three columns then paste these into a notepad++ file and name it sig_GSE72056.txt]
 #  Important: If you need to rerun this script, please delete any output files first.
 #  Input: melan_sample.txt is really GSE72056_melanoma_single_cell_revised_v2.txt
-#  Usage: fastproject melan_sample.txt -s signature_GSE1234.GMT --lean
+#  Usage: fastproject melan_sample.txt -s signature_GSE1234.txt --lean
 ############################################################################################################
 from pandas import DataFrame
 import pandas as pd
@@ -69,9 +69,9 @@ master_set.to_csv('master_set.txt', header=False, index=False, sep='\t', mode='a
 # 2. Sort the column of IDs, using A-Z sort 
 # 3. Then paste in the contents of the master_set.txt file in the next two columns of the spreadsheet
 # 4. Highlight all three columns in the spreadsheet, then copy and paste the contents to a notepad++ file
-# 5. Save the file as sig_GSE72056.GMT
+# 5. Save the file as sig_GSE72056.txt
 # 6. Make sure this file is saved in the same directory as the input file: melan_sample.txt
 # 7. Run the following command in a terminal (note the path of your terminal, since thats where the output file will show up)
-# 8. fastproject melan_sample.txt -s sig_GSE72056.GMT
+# 8. fastproject melan_sample.txt -s sig_GSE72056.txt
 
  
