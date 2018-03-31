@@ -1,0 +1,18 @@
+pip3 install Pillow
+
+python3
+
+# Import Pillow:
+from PIL import Image
+
+# Load the original image:
+img = Image.open("image2.jpg")
+
+img2 = img.rotate(45)
+img2.save("img2.jpg")
+
+img3 = img.rotate(90)
+img3.save("img3.jpg")
+
+img4 = img.rotate(145)
+img4.save("img4.jpg")
