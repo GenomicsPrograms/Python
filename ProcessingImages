@@ -1,7 +1,7 @@
 # AUTHOR: Blog writer, but I adapted it and combined it with other image processing code that I found
 # Purpose: Adapted code to rotate and place a marker on the images
 # For more info: https://auth0.com/blog/image-processing-in-python-with-pillow/
-
+# another good one that I will incorporate/adapt: https://www.geeksforgeeks.org/working-images-python/
 pip3 install Pillow
 
 python3
