@@ -1,5 +1,6 @@
-# AUTHOR: Margaret Linan
+# AUTHOR: Blog writer, but I adapted it and combined it with other image processing code that I found
 # Purpose: Adapted code to rotate and place a marker on the images
+# For more info: https://auth0.com/blog/image-processing-in-python-with-pillow/
 
 pip3 install Pillow
 
