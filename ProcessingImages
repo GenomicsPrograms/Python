@@ -10,7 +10,7 @@ python3
 from PIL import Image, ImageDraw
 
 # Load the original image:
-img = Image.open("pexels-photo.jpeg")
+img = Image.open("pexels-photo.jpg")
 
 # Print attributes:
 print(img.format)
