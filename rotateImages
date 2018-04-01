@@ -1,18 +1,54 @@
+# AUTHOR: Margaret Linan
+# Purpose: Adapted code to rotate and place a marker on the images
+
 pip3 install Pillow
 
 python3
 
 # Import Pillow:
-from PIL import Image
+from PIL import Image, ImageDraw
 
 # Load the original image:
 img = Image.open("image1.jpg")
 
+# Print attributes:
+print(img.format)
+print(img.size)
+print(img.palette)
+
+# Rotate the image 45 degrees:
 img2 = img.rotate(45, expand=True))
+
+# Place a marker on the image:
+draw = ImageDraw.Draw(img2)
+draw.line((0,0) + img2.size, fill=128)
+draw.line((0, img2.size[1], img2.size[0], 0), fill=128)
+del draw
+
+# Save the image:
 img2.save("img2.jpg")
 
+
+# Rotate the image 90 degrees:
 img3 = img.rotate(90, expand=True)
+
+# Place a marker on the image:
+draw = ImageDraw.Draw(img3)
+draw.line((0,0) + img3.size, fill=128)
+draw.line((0, img3.size[1], img3.size[0], 0), fill=128)
+del draw
+
+# Save the image:
 img3.save("img3.jpg")
 
+# Rotate the image 145 degrees:
 img4 = img.rotate(145, expand=True)
+
+# Place a marker on the image:
+draw = ImageDraw.Draw(img4)
+draw.line((0,0) + img4.size, fill=128)
+draw.line((0, img4.size[1], img4.size[0], 0), fill=128)
+del draw
+
+# Save the image:
 img4.save("img4.jpg")
