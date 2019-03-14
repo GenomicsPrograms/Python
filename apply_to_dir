@@ -1,0 +1,20 @@
+If You on windows, then You can write something simple (sequentional) in python:
+
+# name: apply_script_to_glob.py
+import sys, os
+from glob import glob
+
+Script = sys.argv[1]
+Glob   = sys.argv[2]
+
+Files = glob(Glob)
+
+for File in Files:
+    os.system("python2.7 " + Script + " " + File)
+
+(again we didn't use argparse nor checked anything to keep it simple). You'd call the script with
+
+$ python2.7 apply_script_to_glob.py "script.py" "*.txt"
+
+
+https://stackoverflow.com/questions/24403566/apply-function-to-all-files-in-directory
