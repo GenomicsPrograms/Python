@@ -1,0 +1,12 @@
+Make use of sent_tokenize to extract sentences from raw corpus and then word_tokenize to tokenize the sentences and then extract the sentences with "could":
+
+>>> from nltk.corpus import brown
+>>> from nltk import sent_tokenize, word_tokenize
+>>> corpus = " ".join(brown.words())
+>>> [i for i in sent_tokenize(corpus) if u"could" in word_tokenize(i)]
+To get the sentence before and after:
+
+>>> sentences = sent_tokenize(corpus)
+>>> [" ".join([sentences[i-1], j, sentences[i+1]]) for i,j in enumerate(sentences) if u"could" in word_tokenize(j)]
+
+https://stackoverflow.com/questions/23799001/extract-a-sentence-containing-a-word-using-python-as-well-as-the-sentences-ar
